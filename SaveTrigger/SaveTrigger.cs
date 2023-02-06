@@ -1,0 +1,41 @@
+﻿using UnityEngine;
+using VContainer;
+
+namespace SDW.SaveLoad
+{
+    public class SaveTrigger : MonoBehaviour
+    {
+        private ISaver _saver;
+        
+        public void Construct(ISaver saver)
+        {
+            _saver = saver;
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+#if !UNITY_EDITOR
+            if (!hasFocus)
+            {
+                _saver.Save();
+            }
+#endif
+        }
+
+        private void OnApplicationPause(bool pauseStatus)
+        {
+#if !UNITY_EDITOR
+              if (!pauseStatus)
+            {
+                _saver.Save();
+            }
+#endif
+        }
+
+        private void OnApplicationQuit()
+        {
+            _saver.Save();
+        }
+
+    }
+}
