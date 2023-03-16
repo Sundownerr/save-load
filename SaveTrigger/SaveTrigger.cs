@@ -25,7 +25,7 @@ namespace SDW.SaveLoad
         private void OnApplicationPause(bool pauseStatus)
         {
 #if !UNITY_EDITOR
-              if (!pauseStatus)
+              if (pauseStatus)
             {
                 _saver.Save();
             }
